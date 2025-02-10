@@ -24,6 +24,12 @@ console.log("Please edit index.js");
 //       function getName() { return "Susi"; }
 //       Wenn 'getName' an 'helloWorld' übergeben wird, müsste also wieder `Hallo, Susi` erscheinen
 
+function hallo() {
+  console.log("HALLO");
+}
+
+hallo();
+
 // REFERENZ
 // function-Expression: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function
 // typeof-Operator: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof

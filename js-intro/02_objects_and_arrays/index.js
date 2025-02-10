@@ -32,7 +32,7 @@ console.log("Please edit index.js");
 // Objekt-Literale: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#object_literals
 // Arrow-Function expression: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
 
-function createPerson(name, age) {
+function createPerson(name, age = 18) {
   // Zurückgeben: ein Person-Objekt mit name und age
 }
 
