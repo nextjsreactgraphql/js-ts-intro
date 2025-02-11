@@ -1,4 +1,3 @@
-// @ts-nocheck
 export default undefined;
 
 // VORBEREITUNG:
@@ -24,7 +23,12 @@ export default undefined;
 //  Für die Zusatzaufgabe:
 //   Type Narrowing mit in-Operator: https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-in-operator-narrowing
 
+type Wird_schon_werden_was_soll_schiefgehen = any
+
 type Person = {
+
+	greet: Wird_schon_werden_was_soll_schiefgehen
+
 	// todo: beschreiben
 }
 

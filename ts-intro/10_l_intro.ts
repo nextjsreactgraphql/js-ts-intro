@@ -54,6 +54,8 @@ function greet(p?: string | null | (() => string)): string {
 	return `Hello, ${p.toUpperCase()}`
 }
 
+console.log("SSSSSSSSSSSSSSSSSSSSSSSSS")
+
 // Wenn du greet richtig implementiert hast, sollte diese
 // Datei beim ausführen keinen Fehler werfen
 assertEqual(greet(), "Hello");

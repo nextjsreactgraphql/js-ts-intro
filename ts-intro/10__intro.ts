@@ -12,3 +12,49 @@ export default undefined;
 - optionale Funktionsargumente mit ?
 - Type narrowing
 */
+
+// let creates a variable
+let x: string | null = "Hallo";
+x = "Moin";
+x = null;
+// x = undefined;
+
+let a = 1 + 2
+let b = false;
+
+let d: any;
+
+// function greet(person: boolean) {
+//
+// }
+
+function greet(person?: string | null) {    // Type Narrowing
+	if (person === null) {   // "Type Guard"
+		// person  null
+		// person
+		return "...";
+	}
+
+	if (typeof person === "undefined") {  // "Type Guard"
+		return "kein gruss! :-( ";
+	}
+
+	return `Hello ${person.toUpperCase()}`
+}
+
+greet(null)
+let g = greet(7777)
+let greeting = greet("Klaus");
+
+greeting.toUpperCase();
+
+
+
+//
+// // dynamic typing (vs static typing in C#, java, ...)
+// x = 7; // typeof x === "number"
+// x = false; // typeof x === "boolean"
+//
+// x = function() { return "Hallo" } // typeof x === "function"
+//
+// x.toUpperCase(); // Ouch 😱
