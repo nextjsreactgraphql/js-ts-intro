@@ -86,17 +86,17 @@
             </div>
           </div>
         </section>
-<!--        <section>-->
-<!--          <h2>Und ihr?</h2>-->
-<!--          <ul>-->
-<!--            <li>Stellt euch doch bitte kurz vor...</li>-->
-<!--            <li>-->
-<!--              Eure Vorkenntnisse in <b>JavaScript</b>, <b>TypeScript</b>, <b>React</b>,-->
-<!--              anderen Web-Frameworks und/oder Programmiersprachen?-->
-<!--            </li>-->
-<!--            <li>Wünsche für diese Schulung? Besondere Themen oder Interessen?</li>-->
-<!--          </ul>-->
-<!--        </section>-->
+       <section>
+          <h2>Und ihr?</h2>
+          <ul>
+            <li>Stellt euch doch bitte kurz vor...</li>
+            <li>
+              Eure Vorkenntnisse in <b>JavaScript</b>, <b>TypeScript</b>, <b>React</b>,
+              anderen Web-Frameworks und/oder Programmiersprachen?
+            </li>
+            <li>Wünsche für diese Schulung? Besondere Themen oder Interessen?</li>
+          </ul>
+        </section>
         <!-- ============================================================================= -->
 
         <section data-markdown>
@@ -109,8 +109,8 @@
   * Kürzere jeweils Pausen zwischendurch ☕️ 😴
 
 * Dienstag: TypeScript + GraphQL Basics
-  * **10:30 Uhr** bis 17 Uhr
-  * Mittagspause 12:30 bis 13:30 Uhr
+  * 9 Uhr bis 16 Uhr
+  * Mittagspause 12:00 bis 13:00 Uhr
   * Kürzere jeweils Pausen zwischendurch ☕️ 😴
 
 ---
@@ -178,6 +178,34 @@ x = function() { return "Hallo" } // typeof x === "function"
 x.toUpperCase(); // Ouch 😱
     </code></pre>
         </section>
+             <section data-markdown="">
+  <textarea data-template>
+### Hintergrund: Typsystem
+
+* JavaScript hat ein _dynamisches_ Typsystem
+  * Variablen können nicht nur ihre _Werte_ sondern auch ihre _Typen_ ändern
+  * ```typescript
+    // a.js
+    let c = 7;
+    c = "Moin"; // kein Problem
+
+    c = function() { /* ... */ } // auch kein Problem
+    ```
+* Java, C#, Rust etc. haben ein _statisches_ Typsystem
+* Mit **TypeScript** bekommen wir auch ein _statisches_ Typsystem für JavaScript
+  * ```typescript
+    // a.ts
+    let c = 7;
+    c = "Moin"; // ERROR
+
+    c = function() { /* ... */ } // ERROR
+    ```
+* TypeScript basiert auf der JavaScript-Syntax und fügt eigene Syntax hinzu
+  * Das bedeutet, alles was wir an Syntax lernen, verwenden wir so auch (fast) genau mit TS
+  * TypeScript hilft uns "nur" dabei, weniger Fehler zu machen
+  </textarea>
+        </section>
+
         <!-- ============================================================================= -->
         <section>
           <h3>Control flow</h3>
@@ -250,36 +278,7 @@ if ("" == false) {
             <a href="https://github.com/denysdovhan/wtfjs">WTF JS</a>
           </p>
         </section>
-        <section data-markdown>
-          <textarea data-template>
-### Coercion
-
-* Type Coercion ist das _implizite_ Konvertieren eines Typs in einen anderen
-* Es gibt diverse (unübersichtliche) Regeln dafür in die JavaScript
-* Die Regeln sind abhängig von Operator und Typ des Operanden
-* Hier gibt es eine gute [Übersicht](https://medium.com/front-end-weekly/implicit-coercion-in-javascript-5077ad5510d)
-* Wenn zum Beispiel ein `string` und eine `number` "addiert" werden, wird die `number` in den String konvertiert:
-* ```typescript
-  let a = 1 + "1";  // 11
-  ```
-* Bei allen anderen mathematichen Operatoren wird hingegen der String in eine Number konvertiert:
-* ```typescript
-  let b = 1 - "1"; // 0
-  ```
-* Viele im Internet gehandelte Probleme sind exotischer Natur, die man normalerweise ohnehin nicht machen würde
-  * ```typescript
-    let c = [] + 1; // 1
-    let d = {} + true // "[object Object]true"
-    ```
-* Launinger Vortrag zu dem Thema: [WTF JS](https://github.com/denysdovhan/wtfjs)
-* Wenn mal wollte, könnte man damit ganze Anwendungen bauen: [http://www.jsfuck.com/](http://www.jsfuck.com/)
-* Im richtigen Leben bewahrt uns TypeScript in vielen Fällen vor der falschen Verwendung der Typen
-
-  </textarea
-  >
-        </section>
-        <!-- ============================================================================= -->
-        <section>
+               <section>
           <h3>JavaScript: Datatypes</h3>
 
           <pre><code class="javascript">
@@ -319,6 +318,124 @@ if ("" == false) {
 
             </code></pre>
         </section>
+                <section data-markdown="">
+          <textarea data-template>
+### JavaScript: Datatypes
+Objekte (Singletons)
+```typescript
+  const person = {
+    firstname: "Susi",
+    lastname: "Larson"
+  }
+```
+Arrays (Listen)
+```typescript
+  const personen = [ "Susi", "Klaus", "Lara" ];
+```
+
+          </textarea>
+         </section>
+
+        <section data-markdown>
+          <textarea data-template>
+### Coercion
+
+* Type Coercion ist das _implizite_ Konvertieren eines Typs in einen anderen
+* Es gibt diverse (unübersichtliche) Regeln dafür in die JavaScript
+* Die Regeln sind abhängig von Operator und Typ des Operanden
+* Hier gibt es eine gute [Übersicht](https://medium.com/front-end-weekly/implicit-coercion-in-javascript-5077ad5510d)
+* Wenn zum Beispiel ein `string` und eine `number` "addiert" werden, wird die `number` in den String konvertiert:
+* ```typescript
+  let a = 1 + "1";  // 11
+  ```
+* Bei allen anderen mathematichen Operatoren wird hingegen der String in eine Number konvertiert:
+* ```typescript
+  let b = 1 - "1"; // 0
+  ```
+* Viele im Internet gehandelte Probleme sind exotischer Natur, die man normalerweise ohnehin nicht machen würde
+  * ```typescript
+    let c = [] + 1; // 1
+    let d = {} + true // "[object Object]true"
+    ```
+* Launinger Vortrag zu dem Thema: [WTF JS](https://github.com/denysdovhan/wtfjs)
+* Wenn mal wollte, könnte man damit ganze Anwendungen bauen: [http://www.jsfuck.com/](http://www.jsfuck.com/)
+* Im richtigen Leben bewahrt uns TypeScript in vielen Fällen vor der falschen Verwendung der Typen
+
+  </textarea
+  >
+        </section>
+        <!-- ============================================================================= -->
+      <section>
+          <h3>Truthy und falsy</h3>
+          <p>
+            <b><a href="https://developer.mozilla.org/de/docs/Glossary/Falsy">falsy</a></b> ist ein
+            Wert, der <b>false</b> wird, wenn er (implizit oder explizit) in ein Boolean konvertiert
+            wird
+          </p>
+          <p>
+            <b><a href="https://developer.mozilla.org/de/docs/Glossary/Truthy">truthy</a></b> ist
+            ein Wert, der <b>true</b> wird, wenn er (implizit oder explizit) in ein Boolean
+            konvertiert wird (das sind alle Werte, die nicht falsy sind)
+          </p>
+
+          <pre><code class="javascript">
+    if (true) { console.log("I'm true") } // I'm true
+
+    if ("hello") { console.log("I'm true") } // I'm true
+
+    if (null) { console.log("I'm falsy") } //
+
+    if (undefined) { console.log("I'm falsy") } //
+  </code></pre>
+
+          <p class="fragment">Was ist mit diesen?</p>
+
+          <pre class="fragment"><code class="javascript">
+    if (0) { console.log("will this be shown?"); } // 🤔
+  </code></pre>
+
+          <pre class="fragment"><code class="javascript">
+    if ("") { console.log("will this be shown?"); } // 🤔
+  </code></pre>
+
+          <pre class="fragment"><code class="javascript">
+    if ([]) { console.log("will this be shown?"); } // 🤔
+  </code></pre>
+
+          <pre class="fragment"><code class="javascript">
+    if ({}) { console.log("will this be shown?"); } // 🤔
+  </code></pre>
+        </section>
+
+        <!-- ============================================================================= -->
+        <section>
+          <h3>Truthy und falsy #2</h3>
+
+          <p>Insbesondere mit <code>0</code> und Leerstring aufpassen:</p>
+
+          <pre class="fragment"><code class="javascript">
+        function add(a, b) {
+          if (!a) {
+            throw new Error("Invalid Argument a!");
+          }
+
+          if (!b) {
+            throw new Error("Invalid Argument b!");
+          }
+
+          return a + b;
+        }
+      </code></pre>
+          <pre class="fragment"><code class="javascript">
+        add(2, 1);  // 3 👍
+        add(1, null); // "Invalid Argument b" 👍
+      </code></pre>
+
+          <pre class="fragment"><code class="javascript">
+        add(1, 0); // "Invalid Argument b" 🤦
+      </code></pre>
+        </section>
+
         <!-- ============================================================================= -->
         <section>
           <h3>Template Strings</h3>
@@ -417,7 +534,7 @@ printer(helloWorld);
             function add(value = 0, inc) { ... } // FEHLER
           </code></pre>
         </section>
-        <section>
+        <!-- <section>
           <h3>Rest-Parameter</h3>
 
           <p class="fragment">
@@ -448,7 +565,7 @@ printer(helloWorld);
 
             // words ist ein Array mit allen Parametern ("One", "Two")
           </code></pre>
-        </section>
+        </section> -->
 
         <!-- ============================================================================= -->
         <section>
@@ -837,7 +954,7 @@ person.sayHello();  Hello, undefined 🤪
             </code></pre>
         </section>
         <section>
-          <h3>Destructuring #3</h3>
+          <h3>Destructuring mit Funktionsparametern</h3>
           <p>Funktionsparameter, die ein Objekt sind, können destrukturiert werden:</p>
 
           <pre><code class="javascript">
@@ -860,7 +977,7 @@ person.sayHello();  Hello, undefined 🤪
             </code></pre>
         </section>
         <section>
-          <h3>Destructuring #3</h3>
+          <h3>Destructuring: Default-Werte</h3>
           <p>Mit Default-Wert</p>
           <pre><code class="javascript">
              function printPerson({name, age, city="Bonn"}) {
@@ -953,74 +1070,7 @@ person.sayHello();  Hello, undefined 🤪
         </section>
 
         <!-- ============================================================================= -->
-        <!-- ============================================================================= -->
-        <section>
-          <h3>Truthy und falsy</h3>
-          <p>
-            <b><a href="https://developer.mozilla.org/de/docs/Glossary/Falsy">falsy</a></b> ist ein
-            Wert, der <b>false</b> wird, wenn er (implizit oder explizit) in ein Boolean konvertiert
-            wird
-          </p>
-          <p>
-            <b><a href="https://developer.mozilla.org/de/docs/Glossary/Truthy">truthy</a></b> ist
-            ein Wert, der <b>true</b> wird, wenn er (implizit oder explizit) in ein Boolean
-            konvertiert wird (das sind alle Werte, die nicht falsy sind)
-          </p>
-
-          <pre><code class="javascript">
-    if (true) { console.log("I'm true") } // I'm true
-
-    if ("hello") { console.log("I'm true") } // I'm true
-    
-    if (null) { console.log("I'm falsy") } // 
-
-    if (undefined) { console.log("I'm falsy") } // 
-  </code></pre>
-
-          <p class="fragment">Was ist mit diesen?</p>
-
-          <pre class="fragment"><code class="javascript">
-    if (0) { console.log("will this be shown?"); } // 🤔
-  </code></pre>
-
-          <pre class="fragment"><code class="javascript">
-    if ("") { console.log("will this be shown?"); } // 🤔
-  </code></pre>
-
-          <pre class="fragment"><code class="javascript">
-    if ([]) { console.log("will this be shown?"); } // 🤔
-  </code></pre>
-
-          <pre class="fragment"><code class="javascript">
-    if ({}) { console.log("will this be shown?"); } // 🤔
-  </code></pre>
-        </section>
-
-        <!-- ============================================================================= -->
-        <section>
-          <h3>Truthy und falsy #2</h3>
-
-          <p>Insbesondere mit <code>0</code> und Leerstring aufpassen:</p>
-
-          <pre class="fragment"><code class="javascript">
-        function add(a, b) {
-          if (!a || !b) {
-            throw new Error("Invalid Argument!");
-          }
-
-          return a + b;
-        }
-      </code></pre>
-          <pre class="fragment"><code class="javascript">
-        add(2, 1);  // 3 👍
-        add(1, null); // "Invalid Argument" 👍
-      </code></pre>
-
-          <pre class="fragment"><code class="javascript">
-        add(1, 0); // "Invalid Argument" 🤦
-      </code></pre>
-        </section>
-
+       
         <section data-markdown>
           <textarea data-template>
 ### Truthy und falsy #3
