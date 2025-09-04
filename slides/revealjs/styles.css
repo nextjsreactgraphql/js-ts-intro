@@ -73,6 +73,7 @@ code span.line-number {
 
 .reveal pre {
   max-width: 1500px;
+  width: 100%;
 }
 
 .reveal pre code {

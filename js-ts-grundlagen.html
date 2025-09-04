@@ -165,16 +165,24 @@
   </p>
 
           <pre><code class="javascript">
-// let creates a variable
+// 'let' erzeugt eine Variable
+
 let x = "Hallo"; // typeof x === "string"
+
 </code></pre>
           <pre class="fragment"><code class="javascript">
 // dynamic typing (vs static typing in C#, java, ...)
+
 x = 7; // typeof x === "number"
+
 x = false; // typeof x === "boolean"
 
+</code></pre>
+  <pre class="fragment"><code class="javascript">
 x = function() { return "Hallo" } // typeof x === "function"
 
+</code></pre>
+  <pre class="fragment"><code class="javascript">
 x.toUpperCase(); // Ouch 😱
     </code></pre>
         </section>
@@ -187,6 +195,7 @@ x.toUpperCase(); // Ouch 😱
   * ```typescript
     // a.js
     let c = 7;
+
     c = "Moin"; // kein Problem
 
     c = function() { /* ... */ } // auch kein Problem
@@ -196,6 +205,7 @@ x.toUpperCase(); // Ouch 😱
   * ```typescript
     // a.ts
     let c = 7;
+
     c = "Moin"; // ERROR
 
     c = function() { /* ... */ } // ERROR
@@ -229,13 +239,17 @@ x.toUpperCase(); // Ouch 😱
 
           <pre class="fragment"><code class="javascript">
             // Variable
+
             let alter = 42;
+
             alter = 43; // OK
           </code></pre>
           <pre class="fragment"><code class="javascript">
 
             // Konstante
+
             const name = "Susi";
+
             name = "Klaus"; // TypeError: invalid assignment to const 'name'
           </code></pre>
 
@@ -246,10 +260,12 @@ x.toUpperCase(); // Ouch 😱
         <section>
           <h3>Operatoren</h3>
           <pre><code class="javascript">
-// === (triple equal operator) OHNE implizite Typ-Konvertierung
+// === (triple equal operator)
+
 if (42 === 42) {
   console.log("of course"); // of course
 }
+
 if ("3" === 3) {
   console.log("makes sense"); //
 }
@@ -260,13 +276,16 @@ if ("" === false) {
             </code></pre>
           <pre class="fragment"><code class="javascript">
 // == (double equal operator) mit impliziter Typ-Konvertierung
+
 // ("coercion")
 if (42 == 42) {
   console.log("of course"); // of course
 }
+
 if ("3" == 3) {
   console.log("makes sense"); // makes sense
 }
+
 if ("" == false) {
   console.log("hmm..."); // hmm...
 }
@@ -718,12 +737,16 @@ printer(helloWorld);
 
   const s = persons.findIndex(n => n.startsWith("S")); // 1
   const t = persons.findIndex(p => p.startsWith("T")); // -1
-
-
   ```
+---
+### Arrays
 * Filtern
-* ```typescript
-  const users = [ { name: "Susi", active: true }, { name: "Klaus", active: false }, { name: "Tina", active: true } ]
+```typescript
+  const users = [
+            { name: "Susi", active: true },
+            { name: "Klaus", active: false },
+            { name: "Tina", active: true }
+  ]
   const activeUsers = users.filter(u => u.active === true);
             // [ { name: "Susi", active: true }, { name: "Tina", active: true } ]
   ```
