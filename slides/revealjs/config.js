@@ -74,17 +74,17 @@ Reveal.initialize({
     //   n.parentNode.insertBefore(div, n);
     //   div.appendChild(n);
 
-    const clipboard = document.getElementById("nils-clipboard");
-    clipboard.addEventListener("click", () => {
-      const githubUrl =
-        "https://nilshartmann.github.io" +
-        window.location.pathname +
-        window.location.hash;
-      console.log(githubUrl);
-      navigator.clipboard.writeText(githubUrl);
-    });
+//    const clipboard = document.getElementById("nils-clipboard");
+//    clipboard.addEventListener("click", () => {
+//      const githubUrl =
+//        "https://nilshartmann.github.io" +
+//        window.location.pathname +
+//        window.location.hash;
+//      console.log(githubUrl);
+//      navigator.clipboard.writeText(githubUrl);
+//    });
 
-    clipboard.style.display = "block";
+//    clipboard.style.display = "block";
 
     // });
   } else {
