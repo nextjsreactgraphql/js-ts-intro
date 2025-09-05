@@ -5,6 +5,13 @@ export default undefined;
 //    - Damit "aktivierst" du TypeScript in dieser Datei
 //    - Deine IDE zeigt dir jetzt TS-Fehler an (wenn es welche gibt)
 //
+// AUSFÜHREN DER DATEI:
+//  Node.js kann erst aber Version 24 TypeScript-Dateien "ohne Weiteres" ausführen. Daher:
+//  - Entweder direkt aus IntelliJ (Context Menu -> Run...)
+//  - oder per node auf der Kommandozeile:
+//    - Node (älter als V24): node --experimental-transform-types 20_a_objects.ts
+//    - Node (ab Version 24): node 20_a_objects.ts
+//
 // AUFGABE:
 //  - Beschreibe ein Objekt 'Person' mit den folgenden Eigenschaften:
 //    - salutation (String oder null)

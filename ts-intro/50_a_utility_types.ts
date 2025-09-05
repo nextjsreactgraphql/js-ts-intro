@@ -12,6 +12,13 @@ type Person = {
 //   - Entferne die Zeile '// @ts-nocheck' am Beginn der Datei,
 //     damit TS hier Fehler anzeigt
 //
+// AUSFÜHREN DER DATEI:
+//  Node.js kann erst aber Version 24 TypeScript-Dateien "ohne Weiteres" ausführen. Daher:
+//  - Entweder direkt aus IntelliJ (Context Menu -> Run...)
+//  - oder per node auf der Kommandozeile:
+//    - Node (älter als V24): node --experimental-transform-types 50_a_utility_types.ts
+//    - Node (ab Version 24): node 50_a_utility_types.ts
+//
 // AUFGABE:
 //   Die Funktion 'newPerson' soll einen korrekten Typen für
 //   // den Parameter 'p' bekommen ('any' bitte entfernen)
