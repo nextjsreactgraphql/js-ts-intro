@@ -36,7 +36,12 @@ function birthday(persons, name) {
 
 const res1 = birthday(persons, "Klaus");
 console.log("res1", res1)
+// zurückgegebene Liste muss neu sein
+assert.notEqual(res1, persons);
+// "Klaus" muss aktualisiert worden sein
 assert.deepStrictEqual(res1[0], {name: "Klaus", age: 33});
+// "Klaus" muss ein neues Objekt sein
+assert.notEqual(persons[0], res1[0]);
 // Person 1 und Person 2 sollen nicht verändert werden
 assert.equal(res1[1], persons[1]);
 assert.equal(res1[2], persons[2]);
