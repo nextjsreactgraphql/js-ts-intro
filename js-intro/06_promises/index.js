@@ -1,18 +1,22 @@
 // Übung: Promises
 
-// loadGreetingFromServer liefert ein Objekt mit einen Gruß für den Namen zurück,
-// oder einen Fehler wenn kein name angegeben wurde.
-//  Diese Funktion ist "fertig", die musst Du nur verwenden.
+// HINTERGRUND:
 //
-// Im Erfolgsfall liefert die Funktion ein Promise zurückgegeben, das zum folgenden
-// Objekt aufgelöst wird { phrase: ..., name: ... }
+// Es gibt eine fertige Funktion in "./api.js": "loadGreetingFromServer"
+// Diese Funktion liefert für einen übergebenen Namen ein Objekt mit einem
+// Gruß zurück, oder einen Fehler, wenn kein Name übergeben wurde.
+//
+// Im Erfolgsfall wird das Objekt mit dem Gruß als Promise zurückgegeben,
+// das zum folgenden Objekt aufgelöst wird { phrase: ..., name: ... }
 
-// 1. Vervollständige getGreetingAsString (s.u.)
+// AUFGABE:
+//
+// 1. Vervollständige die Implementierung von getGreetingAsString (s.u.)
 // 2. Vervollständige die Aufrufe von getGreetingAsString (s.u.)
 
 function getGreetingAsString(name) {
   // Implementiere diese Funktion
-  // Die Funktion soll loadGreetingFromServer (aus "api.js") mit 'name' aufrufen und
+  // Diese Funktion soll loadGreetingFromServer (aus "api.js") mit 'name' aufrufen und
   //   - im Erfolgsfall einen String zurückliefern, in dem die Daten des von
   //     loadGreetingFromServer zurückgelieferte Greeting-Objekts enthalten sind
   //     Das Greeting-Objekt besteht auf 'name' und 'phrase'
