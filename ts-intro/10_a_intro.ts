@@ -1,4 +1,3 @@
-// @ts-nocheck
 export default undefined;
 
 // VORBEREITUNG:
@@ -19,16 +18,12 @@ export default undefined;
 //      - p ist optional (darf also weggelassen werden)
 //      - p darf null sein
 //      - p darf ein String sein
-//      - OPTIONAL/ZUSATZAUFGABE: p darf eine Funktion (!) sein, die einen String _zurückliefert_
 //    - Die Funktion soll _immer_ einen String zurückliefern
 //
 //  2. Implementiere die Funktion:
 //    - wenn p nicht angegebn wurde, soll sie "Hello" zurückgegebn
 //    - wenn p ein String ist, soll sie "Hello, " gefolgt vom String in Großbuchstaben
 //        zurückliefern (toUpperCase())
-//    - OPTIONAL/ZUSATZAUFGABE: wenn p eine Funktion ist, soll sie die Funktion ausführen, und
-//        mit dem Rückgabe-Wert einen Gruß bilden:
-//        "Moin, " + Rückgabewert in Großbuchstaben (toUpperCase())
 //
 //  Du kannst kontrollieren, ob du alles korrekt gemacht hast:
 //   1. Es dürfen keine TS-Fehler angezeigt werden
