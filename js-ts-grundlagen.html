@@ -119,8 +119,8 @@
 * Funktionen
 * Wichtige Operatoren
 * Objekte und Arrays
-* Module
 * Promises und async/await
+* Module
 * (TypeScript)
 
 
@@ -1269,409 +1269,171 @@ const olderPersons = persons.map( p => {
           <p class="fragment">Wenn Du fertig bist, bitte "Hand heben" in Zoom ✋‍</p>
         </section>
 
-<section data-markdown="">
-  <textarea data-template>
-### Closures
-<!-- .slide: class="left" -->
-* Eine "normale" Funktion...
-* ```typescript
-  function count() {
-    let v = 1;
+<!--<section data-markdown="">-->
+<!--  <textarea data-template>-->
+<!--### Closures-->
+<!--&lt;!&ndash; .slide: class="left" &ndash;&gt;-->
+<!--* Eine "normale" Funktion...-->
+<!--* ```typescript-->
+<!--  function count() {-->
+<!--    let v = 1;-->
 
-    v = v + 1;
+<!--    v = v + 1;-->
 
-    return v;
-  }
-  ```
-* ```typescript
-  count(); // 2
-  ```
-  * Nach der Ausführung der Funktion wird diese abgeräumt und mit ihr alle Daten
-  * Bei erneuter Ausführung der Funktion wird diese neu initialisiert und beginnt von vorne:
-* ```typescript
-  count(); // 2
-  count(); // 2
-  count(); // 2
-  ```
----
-### Closures
+<!--    return v;-->
+<!--  }-->
+<!--  ```-->
+<!--* ```typescript-->
+<!--  count(); // 2-->
+<!--  ```-->
+<!--  * Nach der Ausführung der Funktion wird diese abgeräumt und mit ihr alle Daten-->
+<!--  * Bei erneuter Ausführung der Funktion wird diese neu initialisiert und beginnt von vorne:-->
+<!--* ```typescript-->
+<!--  count(); // 2-->
+<!--  count(); // 2-->
+<!--  count(); // 2-->
+<!--  ```-->
+<!-- -&#45;&#45;-->
+<!--### Closures-->
 
-* Eine Closure ist eine Funktion, die nicht nur "sich selbst", sondern auch ihre Umgebung (äußere Funktion(en)) kennt
-* Dadurch kann diese Funktion eine "Instanz" haben
-* Im Gegensatz zu einer "normalen" Funktion, behält die Closure ihre "inneren" Daten (Variablen, Funktionen)
-* Diese Daten werden _Closures_ genannt und nicht von der Laufzeitumgebung abgeräumt
-* ```typescript
-  function counter() {
-    let v = 1;
+<!--* Eine Closure ist eine Funktion, die nicht nur "sich selbst", sondern auch ihre Umgebung (äußere Funktion(en)) kennt-->
+<!--* Dadurch kann diese Funktion eine "Instanz" haben-->
+<!--* Im Gegensatz zu einer "normalen" Funktion, behält die Closure ihre "inneren" Daten (Variablen, Funktionen)-->
+<!--* Diese Daten werden _Closures_ genannt und nicht von der Laufzeitumgebung abgeräumt-->
+<!--* ```typescript-->
+<!--  function counter() {-->
+<!--    let v = 1;-->
 
-    function count() {
-      v = v + 1;
-      return v;
-    }
+<!--    function count() {-->
+<!--      v = v + 1;-->
+<!--      return v;-->
+<!--    }-->
 
-    return count;
-  }
-  ```
-* ```typescript
-  const c = counter(); // counter liefert 'count'-Funktion zurück!
-  c(); // 2
-  c(); // 3
-  c(); // 4
+<!--    return count;-->
+<!--  }-->
+<!--  ```-->
+<!--* ```typescript-->
+<!--  const c = counter(); // counter liefert 'count'-Funktion zurück!-->
+<!--  c(); // 2-->
+<!--  c(); // 3-->
+<!--  c(); // 4-->
 
-  const d = counter(); // zweite "Instanz" von count!
-  d(); // 2
-  d(); // 3
+<!--  const d = counter(); // zweite "Instanz" von count!-->
+<!--  d(); // 2-->
+<!--  d(); // 3-->
 
-  ```
-* Die Daten/Closures von `counter` würden hier erst abgeräumt, wenn `c` bzw. `d` nicht mehr verwendet werden
----
-### Closures
-* Eine Closure hat Zugriff auf alle äußeren "Scopes", bis hin zum globalen Scope
-* ```typescript
-  let c = 1;
-  function counter() {
-    let d = c + 1; // Zugriff auf globalen Scope
+<!--  ```-->
+<!--* Die Daten/Closures von `counter` würden hier erst abgeräumt, wenn `c` bzw. `d` nicht mehr verwendet werden-->
+<!-- -&#45;&#45;-->
+<!--### Closures-->
+<!--* Eine Closure hat Zugriff auf alle äußeren "Scopes", bis hin zum globalen Scope-->
+<!--* ```typescript-->
+<!--  let c = 1;-->
+<!--  function counter() {-->
+<!--    let d = c + 1; // Zugriff auf globalen Scope-->
 
-    function count() {
-      let e = c + d; // Zugriff auf höheren und globalen Scope
-      return e;
-    }
-  }
-  ```
-* Von außen kann man nicht in die Closure eingreifen
-* Dadurch kann man z.B. Sichtbarkeiten implementieren
-* ```typescript
-  function calculator(initialValue) {
-    let value = initialValue ?? 0; // "privat"
+<!--    function count() {-->
+<!--      let e = c + d; // Zugriff auf höheren und globalen Scope-->
+<!--      return e;-->
+<!--    }-->
+<!--  }-->
+<!--  ```-->
+<!--* Von außen kann man nicht in die Closure eingreifen-->
+<!--* Dadurch kann man z.B. Sichtbarkeiten implementieren-->
+<!--* ```typescript-->
+<!--  function calculator(initialValue) {-->
+<!--    let value = initialValue ?? 0; // "privat"-->
 
-    function assertValidNumber(v) { // "privat"
-      if (typeof v !== "number") { throw new Error("not a number!") }
-    }
+<!--    function assertValidNumber(v) { // "privat"-->
+<!--      if (typeof v !== "number") { throw new Error("not a number!") }-->
+<!--    }-->
 
-    function add(v) {
-      assertValidNumber(v);
-      value = value + v;
-      return value;
-    }
+<!--    function add(v) {-->
+<!--      assertValidNumber(v);-->
+<!--      value = value + v;-->
+<!--      return value;-->
+<!--    }-->
 
-    function substract(v) {
-      assertValidNumber(v);
-      value = value - v;
-      return value;
-    }
+<!--    function substract(v) {-->
+<!--      assertValidNumber(v);-->
+<!--      value = value - v;-->
+<!--      return value;-->
+<!--    }-->
 
-    return { add, substract };
-  }
-  ```
-* ```typescript
-  const c = calculator(2);
-  c.add(1); // 3
-  c.substract(4); // -1
-  ```
----
-### Lambda
-<!-- .slide: class="left" -->
-* Begriffe Lambda und Closure werden manchmal synonym verwendet
-* Als _Lambda_ wird aber eine anonyme, innere Funktionen bezeichnet
-* ```typescript
-  function addListener(fn) { ... }
+<!--    return { add, substract };-->
+<!--  }-->
+<!--  ```-->
+<!--* ```typescript-->
+<!--  const c = calculator(2);-->
+<!--  c.add(1); // 3-->
+<!--  c.substract(4); // -1-->
+<!--  ```-->
+<!-- -&#45;&#45;-->
+<!--### Lambda-->
+<!--&lt;!&ndash; .slide: class="left" &ndash;&gt;-->
+<!--* Begriffe Lambda und Closure werden manchmal synonym verwendet-->
+<!--* Als _Lambda_ wird aber eine anonyme, innere Funktionen bezeichnet-->
+<!--* ```typescript-->
+<!--  function addListener(fn) { ... }-->
 
-  function app() {
-    registerListener( () => console.log("Event!") ); // Lambda
-  }
-  ```
-* In _Java_ ist eine Lambda keine "echte" Closure
-* Darum müssen in _Java_ verwendete Variablen "effective final" sein
-  * ```java
-    // Java !!
-    class A {
-      void multiply(List<Integer> values) {
-          int v = 2;
-          values.stream().map(i -> i * v); // OK, lese-Zugriff auf v
-      }
+<!--  function app() {-->
+<!--    registerListener( () => console.log("Event!") ); // Lambda-->
+<!--  }-->
+<!--  ```-->
+<!--* In _Java_ ist eine Lambda keine "echte" Closure-->
+<!--* Darum müssen in _Java_ verwendete Variablen "effective final" sein-->
+<!--  * ```java-->
+<!--    // Java !!-->
+<!--    class A {-->
+<!--      void multiply(List<Integer> values) {-->
+<!--          int v = 2;-->
+<!--          values.stream().map(i -> i * v); // OK, lese-Zugriff auf v-->
+<!--      }-->
 
-      void sum(List<Integer> values) {
-          int sum = 0;
-          values.stream().forEach(i -> sum += i ); // ERR: Variable used in lambda expression
-                                                  // should be final or effectively final
-      }
-    }
-    ```
-
-
+<!--      void sum(List<Integer> values) {-->
+<!--          int sum = 0;-->
+<!--          values.stream().forEach(i -> sum += i ); // ERR: Variable used in lambda expression-->
+<!--                                                  // should be final or effectively final-->
+<!--      }-->
+<!--    }-->
+<!--    ```-->
 
 
 
 
 
----
-### Typ von Funktionen
-* Eine `function` ist eine "Unterklasse" eines Objekts in in JavaScript und kein eigener Datentyp
-* ```typescript
-  function greet(msg) {
-    return "Hello, " + msg;
-  }
 
-  greet instanceof Object; // true
-  ```
-* `typeof` liefert für eine Funktion (trotzdem) den eindeutigen String `function` zurück:
-* ```typescript
-  function greet(msg) {
-    return "Hello, " + msg;
-  }
 
-  typeof greet; // "function"
-  ```
----
-### Übung Closures
+<!-- -&#45;&#45;-->
+<!--### Typ von Funktionen-->
+<!--* Eine `function` ist eine "Unterklasse" eines Objekts in in JavaScript und kein eigener Datentyp-->
+<!--* ```typescript-->
+<!--  function greet(msg) {-->
+<!--    return "Hello, " + msg;-->
+<!--  }-->
 
-* *Implementiere einen einfachen Cache* als **Closure**
-* Implementiere den Cache in `04_closures/index.js`
-* Dort findest du auch eine genauere Aufgabenbeschreibung
-* Lösung findest Du in `solution`
-* Wenn Du fertig bist, bitte virtuelle Hand heben 🙋
-  </textarea>
- </section>
+<!--  greet instanceof Object; // true-->
+<!--  ```-->
+<!--* `typeof` liefert für eine Funktion (trotzdem) den eindeutigen String `function` zurück:-->
+<!--* ```typescript-->
+<!--  function greet(msg) {-->
+<!--    return "Hello, " + msg;-->
+<!--  }-->
 
-        <!-- ============================================================================= -->
-        <section id="t-module">
-          <h2>Module</h2>
-        </section>
+<!--  typeof greet; // "function"-->
+<!--  ```-->
+<!-- -&#45;&#45;-->
+<!--### Übung Closures-->
 
-        <section>
-          <h3>Module</h3>
-          <p>Module bestimmen explizit, was außerhalb verwendet werden darf</p>
-          <p>Module geben explizit an, was sie aus anderen Modulen verwenden wollen</p>
-        </section>
+<!--* *Implementiere einen einfachen Cache* als **Closure**-->
+<!--* Implementiere den Cache in `04_closures/index.js`-->
+<!--* Dort findest du auch eine genauere Aufgabenbeschreibung-->
+<!--* Lösung findest Du in `solution`-->
+<!--* Wenn Du fertig bist, bitte virtuelle Hand heben 🙋-->
+<!--  </textarea>-->
+<!-- </section>-->
 
-        <section data-markdown>
-          <textarea data-template>
-### Modulsysteme: Common JS vs ECMAScript Module
-* Das ECMAScript (oder JavaScript) Modul System (ESM) kam erst 2015 in die Sprache
-* Common JS ist das Modulsystem von Node.JS
-* Node.JS unterstützt mittlerweile aber auch das JavaScript Modulsystem
-  * Auch TypeScript unterstützt beide Modulsysteme
-  * Ihr müsst Euch für das Ausgabe-Format entscheiden (CommonJS oder ESM)
-* Auch wenn das CommonJS Modulsystem nicht eingestellt wird, geht die Tendenz zu ESM
-  * Viele Bibliotheken bieten mittlerweile beide Formate (oder nur noch ESM) an
----
-### Unterschiede und Gemeinsamkeiten
-* In beiden Modulsystem ist ein **Modul** eine **Datei**
-  * In Java und anderen Programmiersprachen ist ein Modul tendenziell eine Sammlung von Dateien/Klassen
-* Externe Bibliotheken werden als **Packages** zur Verfügung gestellt (npm: node *package* manager)
-  * Die Bibliotheken können ihren Code für ein oder mehrere Modulsysteme zur Verfügung stellen
-* CommonJS Module werden synchron geladen, ES Module hingegen asynchron
-  * Das macht einen Mischbetrieb für die Laufzeitumgebung komplex
-* CommonJS Module funktionieren nicht im Browser
-* CommonJS flexibler, `require` kann überall verwendet werden, `import` nur am Beginn einer Datei
----
-### Packages in JavaScript
-- Bibliotheken und Tools werden als **Packages** in Registries zur Verfügung gestellt (z.B. NPM Package Registry, https://www.npmjs.com/)
-  - Beispiele für Tools: TypeScript, [ESLint](https://eslint.org/) oder Build-Tools
-  - Für Tools wird in der Regel Node.js als Ausführungsumgebung verwendet (alternativ Bun oder Deno)
-- Welche Packages ihr in eurem Projekt verwendet, wird in der `package.json`-Datei festgehalten
-- Dort gibt es u.a. `dependencies` und `devDependencies`
-  - `dependencies` beschreiben die Packages, die ihr zur Laufzeit verwendet (z.B. React)
-  - `devDependencies` sind Werkzeuge für den Entwicklungsprozess, z.B. TypeScript oder Test-Tools
----
-### Package Manager
-- Zur Installation und Aktualisierung von Packages verwendet ihr einen **Package Manager**
-- Es gibt drei Prominente:
-  - [npm](https://docs.npmjs.com/cli/v11/). Der Default Package Manager und Bestandteil von Node.JS
-  - [yarn](https://yarnpkg.com/) von Meta, aus dem Umfeld des React-Teams
-  - [pnpm](https://pnpm.io/), "Performant" npm. Mein Favorit 😊
-- Die Package Manager arbeiten alle mit der `package.json`-Datei
-- Unterschiede gibt es in der Verwendung (Kommandozeile) und der Installation der Packages
----
-### Abhängigkeiten von Packages
-- Die verwendeten Packages stehen in der `package.json`-Datei
-- Jedes installierte Package kann auch wieder Abhängigkeiten haben, die in dessen `package.json`-Datei stehen
-- Der Package Manager installiert alle Packages inklusive ihrer Abhängigkeiten
----
-### Versionsbereiche
-- In der `package.json` ist für jedes Package eine Version oder ein Versionsbereich angegeben.
-  - Das gilt auch für die abhängigen Packages
-- Damit Installationen reproduzierbar bleiben, legen die Package Manager eine weitere Datei in eurem Projekt ab, die **Lock-Datei**
-  - Diese Datei wird auch in Git eingecheckt
-  - Das Format dieser Datei ist abhängig vom jeweiligen Package Manager, deswegen sollte man sich im Projekt möglichst auf einen Package Manager einigen
----
-### Scripte
-- In der `package.json`-Datei können `scripts` definiert werden
-- Das sind meistens einfache Kommandozeilen-Scripte zum Ausführen z.B. vom Build oder Tests
-  - In Next.js z.B. `dev`, um den Development Server zu starten
-- Alle Package Manager sind in der Lage die Scripte auszuführen, auch wenn die Syntax abweicht
-  - Achtung! Die Scripte werden nativ auf dem Betriebssystem ausgeführt, ihr müsst also darauf achten, dass sie auf allen Betriebssystemen laufen, die ihr unterstützt.
----
-## Module
----
-### Module im Browser
-* Browser unterstützen nur das JavaScript Modulsystem
-  * Und das proprietäre AMD
-* Um auch Node.JS Module nutzen zu können, verwenden die meisten JS Frontend Tools sog. "Bundler"
-* Ein **Bundler** analysiert Eure JavaScript-Dateien und kann die verwendeten Modulsysteme "entfernen"
-* Dazu wird der Code durch Code ersetzt, der im Browser ausführbar ist
-  * Bekannte Bundler: [Webpack](https://webpack.js.org/) und [Rollup](https://rollupjs.org/)
-  * [TurboPack](https://turbo.build/pack) ist noch recht neu ist aber Standard für neue Next.js-Anwendungen
----
-### Das JavaScript Modulsystem
-* Das JavaScript Modulsystem (ESM) könnt ihr verwenden, wenn ihr:
-  * in Eurer `package.json`-Datei den `type`-Eintrag auf `module` setzt
-    * ```json
-      {
-        "type": "module"
-      }
-      ```
-  * oder in Dateien, die die Endung `.mjs` tragen
-* Mit TypeScript und Bundler ist das meistens etwas einfacher:
-  - Ihr verwendet die Dateiendung `.ts` bzw. `.tsx` (für React-Code)
-  - Beim Importieren braucht ihr die Dateiendung _nicht_ anzugeben.
-  </textarea
-  >
-        </section>
 
-        <!-- ============================================================================= -->
-        <section>
-          <h3>Module</h3>
-          <h4>Default Exporte</h4>
-          <p>
-            <em
-            >Objekte, Funktionen, Klassen etc müssen explizit <b>exportiert</b> und
-              <b>importiert</b> werden</em
-            >
-          </p>
-
-          <pre class="fragment"><code class="javascript">
-            // src/domain/Person.js
-            export default function createPerson { ... }
-
-            oder
-
-            function createPerson { ... }
-            export default createPerson
-          </code></pre>
-
-          <pre class="fragment"><code class="javascript">
-              // src/domain/Person.js
-              export default function createPerson() { ... }
-
-              oder
-
-              function createPerson() { ... }
-              export default createPerson;
-            </code></pre>
-
-          <pre class="fragment"><code class="javascript">
-                Nur EIN Default Export erlaubt;
-                export default function createPerson() { ... }
-                export default function makePerson { ... } // KONFLIKT
-              </code></pre>
-        </section>
-
-        <!-- ============================================================================= -->
-        <section>
-          <h3>Module</h3>
-          <h4>Importieren</h4>
-          <p class="fragment">Beim importieren geben wir Pfade(!) an</p>
-          <p class="fragment">
-            Die Endung <code>.js</code> wird auch verwendet, wenn die importierte Datei eine
-            TypeScript-Datei ist!
-          </p>
-          <p class="fragment">
-            Wenn in der <code>package.json</code>-Datei als <code>type</code> <b>nicht</b>
-            <code>module</code> eingetragen ist, müssen die Dateien die Endung
-            <code>.mjs</code> haben
-          </p>
-
-          <pre class="fragment"><code class="javascript">
-              // src/domain/Person.js
-              export default function createPerson() { ... }
-
-            </code></pre>
-
-          <pre class="fragment"><code class="javascript">
-                // src/App.js
-                import createPerson from "./domain/Person.js";
-
-                const person = createPerson("Lemmy", "Kilmister");
-              </code></pre>
-        </section>
-
-        <!-- ============================================================================= -->
-        <section>
-          <h3>Module</h3>
-          <h4>Benannte Exporte</h4>
-          <p class="fragment">
-            Ein Modul kann neben einem Default auch beliebig viele
-            <b>benannte Exporte</b> haben
-          </p>
-
-          <pre class="fragment"><code class="javascript">
-                // src/domain/Person.js
-                export default function createPerson { ...}
-
-                export function updatePerson() { ... }
-                export function removePerson() { ... }
-              </code></pre>
-
-          <pre class="fragment"><code class="javascript">
-                  // src/domain/Person.js
-                  function createPerson { ...}
-                  function updatePerson() { ... }
-                  function removePerson() { ... }
-
-                  export default createPerson;
-
-                  export { updatePerson, removePerson }
-                </code></pre>
-        </section>
-
-        <!-- ============================================================================= -->
-        <section>
-          <h3>Module</h3>
-          <h4>Benannte Importe</h4>
-          <pre class="fragment"><code class="javascript">
-                    // src/App.js
-                    import { removePerson } from "./Person"
-              </code></pre>
-          <pre class="fragment"><code class="javascript">
-                // Default und benannten Export importieren
-                import createPerson, { removePerson } from "./Person.js"
-              </code></pre>
-        </section>
-        <!-- ============================================================================= -->
-        <!-- <section>
-          <h3>Übung: Module</h3>
-
-          <p>Vorbereitung</p>
-          <ol>
-            <li class="fragment">
-              Öffne das Verzeichnis <code>js-intro/04_modules</code> im Terminal
-            </li>
-            <li class="fragment">Führe <code>npx http-server</code> in dem Verzeichnis aus</li>
-            <li class="fragment">
-              Öffne die Seite <a href="http://localhost:8080">http://localhost:8080</a> im Browser
-            </li>
-            <li class="fragment">Wenn Du die Seite geöffnet hast, bitte "Hand heben" in Zoom 🙋‍♀️</li>
-          </ol>
-        </section>
- -->
-        <section>
-          <h2>Übung: Module</h2>
-
-          <p class="fragment">
-            Die Beschreibung der Übung findest Du in
-            <b><code>js-intro/05_modules/index.js</code></b
-            >. Darin kannst Du auch deinen Code schreiben.
-          </p>
-          <p class="fragment">Du kannst die Anwendung mit <code>node index.js</code> ausführen.</p>
-          <p class="fragment">Alle Ausgaben erfolgen im Terminal auf der Konsole.</p>
-          <p class="fragment">Bei Fragen oder Problemen, kannst Du dich jederzeit melden</p>
-          <p class="fragment">
-            Wenn alle Stricke reißen, findest Du eine mögliche Lösung in:
-            <code>js-intro/05_modules/solution/</code>
-          </p>
-          <p class="fragment">Wenn Du fertig bist, bitte "Hand heben" in Zoom 🙋‍♀️</p>
-        </section>
         <!-- ============================================================================= -->
 
         <!-- ============================================================================= -->
@@ -1939,21 +1701,254 @@ loadUserProfileFromServer("susi")
 
           <p class="fragment">
             Die Beschreibung der Übung findest Du in
-            <b><code>js-intro/06_promises/index.js</code></b
+            <b><code>js-intro/05_promises/index.js</code></b
             >. Darin kannst Du auch deinen Code schreiben.
-          </p>
-          <p class="fragment">
-            Du kannst
-            <b><code>js-intro/06_promises/index.html</code></b> in deinem Browser öffnen. Diese Datei
-            führt die <b><code>index.js</code></b
-          >-Datei dann aus.
           </p>
           <p class="fragment">Bei Fragen oder Problemen, kannst Du dich jederzeit melden</p>
           <p class="fragment">
             Wenn alle Stricke reißen, findest Du eine mögliche Lösung in:
-            <code>js-intro/06_promises/solution/index_promise.js</code> bzw. <code>js-intro/05_promises/solution/index_async_await.js</code>
+            <code>js-intro/05_promises/solution/index_promise.js</code> bzw. <code>js-intro/05_promises/solution/index_async_await.js</code>
           </p>
           <p class="fragment">Wenn Du fertig bist, bitte "Hand heben" ✋</p>
+        </section>
+        <!-- ============================================================================= -->
+        <section id="t-module">
+          <h2>Module</h2>
+        </section>
+
+        <section>
+          <h3>Module</h3>
+          <p>Module bestimmen explizit, was außerhalb verwendet werden darf</p>
+          <p>Module geben explizit an, was sie aus anderen Modulen verwenden wollen</p>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+### Modulsysteme: Common JS vs ECMAScript Module
+* Das ECMAScript (oder JavaScript) Modul System (ESM) kam erst 2015 in die Sprache
+* Common JS ist das Modulsystem von Node.JS
+* Node.JS unterstützt mittlerweile aber auch das JavaScript Modulsystem
+  * Auch TypeScript unterstützt beide Modulsysteme
+  * Ihr müsst Euch für das Ausgabe-Format entscheiden (CommonJS oder ESM)
+* Auch wenn das CommonJS Modulsystem nicht eingestellt wird, geht die Tendenz zu ESM
+  * Viele Bibliotheken bieten mittlerweile beide Formate (oder nur noch ESM) an
+---
+### Unterschiede und Gemeinsamkeiten
+* In beiden Modulsystem ist ein **Modul** eine **Datei**
+  * In Java und anderen Programmiersprachen ist ein Modul tendenziell eine Sammlung von Dateien/Klassen
+* Externe Bibliotheken werden als **Packages** zur Verfügung gestellt (npm: node *package* manager)
+  * Die Bibliotheken können ihren Code für ein oder mehrere Modulsysteme zur Verfügung stellen
+* CommonJS Module werden synchron geladen, ES Module hingegen asynchron
+  * Das macht einen Mischbetrieb für die Laufzeitumgebung komplex
+* CommonJS Module funktionieren nicht im Browser
+* CommonJS flexibler, `require` kann überall verwendet werden, `import` nur am Beginn einer Datei
+---
+### Packages in JavaScript
+- Bibliotheken und Tools werden als **Packages** in Registries zur Verfügung gestellt (z.B. NPM Package Registry, https://www.npmjs.com/)
+  - Beispiele für Tools: TypeScript, [ESLint](https://eslint.org/) oder Build-Tools
+  - Für Tools wird in der Regel Node.js als Ausführungsumgebung verwendet (alternativ Bun oder Deno)
+- Welche Packages ihr in eurem Projekt verwendet, wird in der `package.json`-Datei festgehalten
+- Dort gibt es u.a. `dependencies` und `devDependencies`
+  - `dependencies` beschreiben die Packages, die ihr zur Laufzeit verwendet (z.B. React)
+  - `devDependencies` sind Werkzeuge für den Entwicklungsprozess, z.B. TypeScript oder Test-Tools
+---
+### Package Manager
+- Zur Installation und Aktualisierung von Packages verwendet ihr einen **Package Manager**
+- Es gibt drei Prominente:
+  - [npm](https://docs.npmjs.com/cli/v11/). Der Default Package Manager und Bestandteil von Node.JS
+  - [yarn](https://yarnpkg.com/) von Meta, aus dem Umfeld des React-Teams
+  - [pnpm](https://pnpm.io/), "Performant" npm. Mein Favorit 😊
+- Die Package Manager arbeiten alle mit der `package.json`-Datei
+- Unterschiede gibt es in der Verwendung (Kommandozeile) und der Installation der Packages
+---
+### Abhängigkeiten von Packages
+- Die verwendeten Packages stehen in der `package.json`-Datei
+- Jedes installierte Package kann auch wieder Abhängigkeiten haben, die in dessen `package.json`-Datei stehen
+- Der Package Manager installiert alle Packages inklusive ihrer Abhängigkeiten
+---
+### Versionsbereiche
+- In der `package.json` ist für jedes Package eine Version oder ein Versionsbereich angegeben.
+  - Das gilt auch für die abhängigen Packages
+- Damit Installationen reproduzierbar bleiben, legen die Package Manager eine weitere Datei in eurem Projekt ab, die **Lock-Datei**
+  - Diese Datei wird auch in Git eingecheckt
+  - Das Format dieser Datei ist abhängig vom jeweiligen Package Manager, deswegen sollte man sich im Projekt möglichst auf einen Package Manager einigen
+---
+### Scripte
+- In der `package.json`-Datei können `scripts` definiert werden
+- Das sind meistens einfache Kommandozeilen-Scripte zum Ausführen z.B. vom Build oder Tests
+  - In Next.js z.B. `dev`, um den Development Server zu starten
+- Alle Package Manager sind in der Lage die Scripte auszuführen, auch wenn die Syntax abweicht
+  - Achtung! Die Scripte werden nativ auf dem Betriebssystem ausgeführt, ihr müsst also darauf achten, dass sie auf allen Betriebssystemen laufen, die ihr unterstützt.
+---
+## Module
+---
+### Module im Browser
+* Browser unterstützen nur das JavaScript Modulsystem
+  * Und das proprietäre AMD
+* Um auch Node.JS Module nutzen zu können, verwenden die meisten JS Frontend Tools sog. "Bundler"
+* Ein **Bundler** analysiert Eure JavaScript-Dateien und kann die verwendeten Modulsysteme "entfernen"
+* Dazu wird der Code durch Code ersetzt, der im Browser ausführbar ist
+  * Bekannte Bundler: [Webpack](https://webpack.js.org/) und [Rollup](https://rollupjs.org/)
+  * [TurboPack](https://turbo.build/pack) ist noch recht neu ist aber Standard für neue Next.js-Anwendungen
+---
+### Das JavaScript Modulsystem
+* Das JavaScript Modulsystem (ESM) könnt ihr verwenden, wenn ihr:
+  * in Eurer `package.json`-Datei den `type`-Eintrag auf `module` setzt
+    * ```json
+      {
+        "type": "module"
+      }
+      ```
+  * oder in Dateien, die die Endung `.mjs` tragen
+* Mit TypeScript und Bundler ist das meistens etwas einfacher:
+  - Ihr verwendet die Dateiendung `.ts` bzw. `.tsx` (für React-Code)
+  - Beim Importieren braucht ihr die Dateiendung _nicht_ anzugeben.
+  </textarea
+  >
+        </section>
+
+        <!-- ============================================================================= -->
+        <section>
+          <h3>Module</h3>
+          <h4>Default Exporte</h4>
+          <p>
+            <em
+            >Objekte, Funktionen, Klassen etc müssen explizit <b>exportiert</b> und
+              <b>importiert</b> werden</em
+            >
+          </p>
+
+          <pre class="fragment"><code class="javascript">
+            // src/domain/Person.js
+            export default function createPerson { ... }
+
+            oder
+
+            function createPerson { ... }
+            export default createPerson
+          </code></pre>
+
+          <pre class="fragment"><code class="javascript">
+              // src/domain/Person.js
+              export default function createPerson() { ... }
+
+              oder
+
+              function createPerson() { ... }
+              export default createPerson;
+            </code></pre>
+
+          <pre class="fragment"><code class="javascript">
+                Nur EIN Default Export erlaubt;
+                export default function createPerson() { ... }
+                export default function makePerson { ... } // KONFLIKT
+              </code></pre>
+        </section>
+
+        <!-- ============================================================================= -->
+        <section>
+          <h3>Module</h3>
+          <h4>Importieren</h4>
+          <p class="fragment">Beim importieren geben wir Pfade(!) an</p>
+          <p class="fragment">
+            Die Endung <code>.js</code> wird auch verwendet, wenn die importierte Datei eine
+            TypeScript-Datei ist!
+          </p>
+          <p class="fragment">
+            Wenn in der <code>package.json</code>-Datei als <code>type</code> <b>nicht</b>
+            <code>module</code> eingetragen ist, müssen die Dateien die Endung
+            <code>.mjs</code> haben
+          </p>
+
+          <pre class="fragment"><code class="javascript">
+              // src/domain/Person.js
+              export default function createPerson() { ... }
+
+            </code></pre>
+
+          <pre class="fragment"><code class="javascript">
+                // src/App.js
+                import createPerson from "./domain/Person.js";
+
+                const person = createPerson("Lemmy", "Kilmister");
+              </code></pre>
+        </section>
+
+        <!-- ============================================================================= -->
+        <section>
+          <h3>Module</h3>
+          <h4>Benannte Exporte</h4>
+          <p class="fragment">
+            Ein Modul kann neben einem Default auch beliebig viele
+            <b>benannte Exporte</b> haben
+          </p>
+
+          <pre class="fragment"><code class="javascript">
+                // src/domain/Person.js
+                export default function createPerson { ...}
+
+                export function updatePerson() { ... }
+                export function removePerson() { ... }
+              </code></pre>
+
+          <pre class="fragment"><code class="javascript">
+                  // src/domain/Person.js
+                  function createPerson { ...}
+                  function updatePerson() { ... }
+                  function removePerson() { ... }
+
+                  export default createPerson;
+
+                  export { updatePerson, removePerson }
+                </code></pre>
+        </section>
+
+        <!-- ============================================================================= -->
+        <section>
+          <h3>Module</h3>
+          <h4>Benannte Importe</h4>
+          <pre class="fragment"><code class="javascript">
+                    // src/App.js
+                    import { removePerson } from "./Person"
+              </code></pre>
+          <pre class="fragment"><code class="javascript">
+                // Default und benannten Export importieren
+                import createPerson, { removePerson } from "./Person.js"
+              </code></pre>
+        </section>
+        <!-- ============================================================================= -->
+        <!-- <section>
+          <h3>Übung: Module</h3>
+
+          <p>Vorbereitung</p>
+          <ol>
+            <li class="fragment">
+              Öffne das Verzeichnis <code>js-intro/04_modules</code> im Terminal
+            </li>
+            <li class="fragment">Führe <code>npx http-server</code> in dem Verzeichnis aus</li>
+            <li class="fragment">
+              Öffne die Seite <a href="http://localhost:8080">http://localhost:8080</a> im Browser
+            </li>
+            <li class="fragment">Wenn Du die Seite geöffnet hast, bitte "Hand heben" in Zoom 🙋‍♀️</li>
+          </ol>
+        </section>
+ -->
+        <section>
+          <h2>Übung: Module</h2>
+
+          <p class="fragment">
+            Die Beschreibung der Übung findest Du in
+            <b><code>js-intro/05_modules/index.js</code></b
+            >. Darin kannst Du auch deinen Code schreiben.
+          </p>
+          <p class="fragment">Du kannst die Anwendung mit <code>node index.js</code> ausführen.</p>
+          <p class="fragment">Alle Ausgaben erfolgen im Terminal auf der Konsole.</p>
+          <p class="fragment">Bei Fragen oder Problemen, kannst Du dich jederzeit melden</p>
+          <p class="fragment">
+            Wenn alle Stricke reißen, findest Du eine mögliche Lösung in:
+            <code>js-intro/06_modules/solution/</code>
+          </p>
+          <p class="fragment">Wenn Du fertig bist, bitte "Hand heben" in Zoom 🙋‍♀️</p>
         </section>
         <section id="t-typescript">
           <h2>TypeScript</h2>

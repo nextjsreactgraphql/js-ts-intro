@@ -1,13 +1,30 @@
 // Übung: Promises
 
-// HINTERGRUND:
-//
-// Es gibt eine fertige Funktion in "./api.js": "loadGreetingFromServer"
-// Diese Funktion liefert für einen übergebenen Namen ein Objekt mit einem
+// Die folgende, fertig implementierte "loadGreetingFromServer"-Funktion
+// steht exemplarische für eine asynchrone Funktion, die z.B. von einer
+// Bibliothek zur Verfügung gestellt wird und mit der wir Daten von einer
+// asynchronen API abfragen können.
+// Sie liefert für einen übergebenen Namen ein Objekt mit einem
 // Gruß zurück, oder einen Fehler, wenn kein Name übergeben wurde.
 //
-// Im Erfolgsfall wird das Objekt mit dem Gruß als Promise zurückgegeben,
-// das zum folgenden Objekt aufgelöst wird { phrase: ..., name: ... }
+// Im Erfolgsfall wird ein "Greeting-Objekt" mit dem Gruß als Promise zurückgegeben:
+//  { phrase: "...", name: "..." }
+function loadGreetingFromServer(name) {
+  return new Promise((resolve, reject) => {
+    const timeout = name ? 500 : 250;
+
+    setTimeout(() => {
+      if (!name) {
+        return reject("Must specify name");
+      }
+      return resolve({
+        phrase: "Hello",
+        name
+      });
+    }, timeout);
+  });
+}
+
 
 // AUFGABE:
 //
@@ -16,7 +33,7 @@
 
 function getGreetingAsString(name) {
   // Implementiere diese Funktion
-  // Diese Funktion soll loadGreetingFromServer (aus "api.js") mit 'name' aufrufen und
+  // Diese Funktion soll loadGreetingFromServer  mit 'name' aufrufen und
   //   - im Erfolgsfall einen String zurückliefern, in dem die Daten des von
   //     loadGreetingFromServer zurückgelieferte Greeting-Objekts enthalten sind
   //     Das Greeting-Objekt besteht auf 'name' und 'phrase'

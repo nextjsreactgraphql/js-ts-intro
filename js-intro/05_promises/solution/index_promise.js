@@ -1,4 +1,3 @@
-import {loadGreetingFromServer} from "./api.js";
 // Übung: Promises
 
 // loadGreetingFromServer liefert ein Objekt mit einen Gruß für den Namen zurück,
@@ -6,7 +5,21 @@ import {loadGreetingFromServer} from "./api.js";
 //
 // Im Erfolgsfall wird ein Promise zurückgegeben, das zum folgenden
 // Objekt aufgelöst wird { phrase: ..., name: ... }
+function loadGreetingFromServer(name) {
+  return new Promise((resolve, reject) => {
+    const timeout = name ? 500 : 250;
 
+    setTimeout(() => {
+      if (!name) {
+        return reject("Must specify name");
+      }
+      return resolve({
+        phrase: "Hello",
+        name
+      });
+    }, timeout);
+  });
+}
 // 1. Vervollständige getGreetingAsString (s.u.)
 // 2.
 
